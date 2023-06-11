@@ -20,6 +20,6 @@ public class Member {
     @Embedded
     private Address address;
 
-    @OneToMany
+    @OneToMany(mappedBy = "order")
     private  List<Order>orders = new ArrayList<>();
 }
