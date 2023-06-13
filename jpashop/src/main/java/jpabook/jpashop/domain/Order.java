@@ -3,8 +3,6 @@ package jpabook.jpashop.domain;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.aspectj.weaver.ast.Or;
-import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -18,7 +16,7 @@ public class Order {
 
     @Id
     @GeneratedValue
-    @Column(name ="id")
+    @Column(name ="order_id")
     private Long id;
 
 
@@ -27,7 +25,7 @@ public class Order {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany (mappedBy = "order")
+    @OneToMany (mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -50,7 +48,7 @@ public class Order {
         orderItem.setOrder(this);
     }
 
-    public void setDelivert(Delivery delivery) {
+    public void setDelivery(Delivery delivery) {
         this.delivery = delivery;
         delivery.setOrder(this);
 
